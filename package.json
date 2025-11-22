@@ -1,0 +1,36 @@
+{
+  "name": "zotero-nsai",
+  "version": "0.1.0",
+  "description": "NSAI: Neurosymbolic validation and preparation for Zotero research data",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "zotero",
+    "validation",
+    "neurosymbolic",
+    "research",
+    "citations",
+    "wittgenstein"
+  ],
+  "author": "Hyperpolymath",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.7",
+    "vitest": "^1.0.4"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}
