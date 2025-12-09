@@ -458,7 +458,7 @@ console.log(exportPackage.payload.uncertaintyRegions.length);   // 0 (no uncerta
         "suggestedExploration": {
           "useContradictionDetection": true,
           "useMoodScoring": true,
-          "useMystery Clustering": true,
+          "useMysteryClustering": true,
           "useFogTrailVisualization": true
         },
         "uncertaintyLevel": 0.8

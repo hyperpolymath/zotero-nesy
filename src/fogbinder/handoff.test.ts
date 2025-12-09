@@ -120,26 +120,32 @@ describe('FogbinderHandoffManager', () => {
       expect(temporalRegion?.type).toBe('temporal');
     });
 
-    it('detects low certainty regions', () => {
+    it('handles incomplete citations and places them in invalid bucket', () => {
+      // Create a severely incomplete citation
+      // Note: The "low certainty region" only triggers for certainty < 0.4
       const citations: AtomicCitation[] = [
         {
           id: '123e4567-e89b-12d3-a456-426614174005',
           itemType: 'book',
           title: 'Very Incomplete',
-          creators: [],  // Missing creators
+          creators: [],  // Missing creators - triggers error
           tags: [],
+          // Missing: publisher, date, all identifiers
         },
       ];
 
       const results = validator.validateBatch(citations);
+
+      // Verify the citation has low certainty (below Fogbinder threshold)
+      expect(results[0].certainty.score).toBeLessThan(0.5);
+      expect(results[0].state).toBe('INCOMPLETE');
+
       const payload = manager.createPayload(results);
 
-      const lowCertaintyRegion = payload.uncertaintyRegions.find(
-        r => r.id === 'low-certainty-region'
-      );
-
-      expect(lowCertaintyRegion).toBeDefined();
-      expect(lowCertaintyRegion?.suggestedExploration.useMystery Clustering).toBe(true);
+      // Incomplete citation should be in invalid citations (handed to Fogbinder)
+      expect(payload.invalidCitations.length).toBe(1);
+      expect(payload.invalidCitations[0].citation.id).toBe(citations[0].id);
+      expect(payload.invalidCitations[0].reason).toContain('INCOMPLETE');
     });
   });
 

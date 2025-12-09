@@ -173,7 +173,7 @@ export class FogbinderHandoffManager {
         citationIds: noPersistentId.map(r => r.citation.id),
         description: `${noPersistentId.length} citations lack persistent identifiers`,
         suggestedExploration: {
-          useMystery Clustering: true,
+          useMysteryClustering: true,
         },
         uncertaintyLevel: 0.6,
       });
@@ -215,7 +215,7 @@ export class FogbinderHandoffManager {
         suggestedExploration: {
           useContradictionDetection: true,
           useMoodScoring: true,
-          useMystery Clustering: true,
+          useMysteryClustering: true,
           useFogTrailVisualization: true,
         },
         uncertaintyLevel: 0.8,

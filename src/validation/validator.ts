@@ -17,6 +17,63 @@ import type {
 } from '../types/atomic';
 
 /**
+ * Validation strictness levels
+ *
+ * - 'strict': Require persistent identifiers, harsh certainty scoring
+ * - 'standard': Default behavior, balanced validation
+ * - 'lenient': Accept more incomplete data, generous scoring
+ */
+export type StrictnessLevel = 'strict' | 'standard' | 'lenient';
+
+/**
+ * Validator configuration
+ */
+export interface ValidatorConfig {
+  /** Strictness level for validation (default: 'standard') */
+  strictness: StrictnessLevel;
+
+  /** Certainty threshold for Fogbinder handoff (default: 0.7) */
+  fogbinderThreshold: number;
+
+  /** Require persistent identifiers for VALID state (default: false) */
+  requirePersistentIdentifiers: boolean;
+
+  /** Minimum certainty for VALID state (default: 0.0) */
+  minimumValidCertainty: number;
+}
+
+/**
+ * Default configuration
+ */
+export const DEFAULT_CONFIG: ValidatorConfig = {
+  strictness: 'standard',
+  fogbinderThreshold: 0.7,
+  requirePersistentIdentifiers: false,
+  minimumValidCertainty: 0.0,
+};
+
+/**
+ * Strictness presets
+ */
+export const STRICTNESS_PRESETS: Record<StrictnessLevel, Partial<ValidatorConfig>> = {
+  strict: {
+    requirePersistentIdentifiers: true,
+    fogbinderThreshold: 0.8,
+    minimumValidCertainty: 0.5,
+  },
+  standard: {
+    requirePersistentIdentifiers: false,
+    fogbinderThreshold: 0.7,
+    minimumValidCertainty: 0.0,
+  },
+  lenient: {
+    requirePersistentIdentifiers: false,
+    fogbinderThreshold: 0.5,
+    minimumValidCertainty: 0.0,
+  },
+};
+
+/**
  * Required fields by item type (logical completeness requirements)
  */
 const REQUIRED_FIELDS: Record<string, string[]> = {
@@ -33,8 +90,43 @@ const REQUIRED_FIELDS: Record<string, string[]> = {
 
 /**
  * Main validator class
+ *
+ * Supports configurable strictness levels for different use cases.
  */
 export class TractarianValidator {
+  private config: ValidatorConfig;
+
+  constructor(config: Partial<ValidatorConfig> = {}) {
+    // Apply strictness preset first, then user overrides
+    const strictness = config.strictness || DEFAULT_CONFIG.strictness;
+    const preset = STRICTNESS_PRESETS[strictness];
+
+    this.config = {
+      ...DEFAULT_CONFIG,
+      ...preset,
+      ...config,
+    };
+  }
+
+  /**
+   * Get current configuration
+   */
+  getConfig(): Readonly<ValidatorConfig> {
+    return { ...this.config };
+  }
+
+  /**
+   * Update configuration
+   */
+  setConfig(config: Partial<ValidatorConfig>): void {
+    if (config.strictness && config.strictness !== this.config.strictness) {
+      const preset = STRICTNESS_PRESETS[config.strictness];
+      this.config = { ...this.config, ...preset, ...config };
+    } else {
+      this.config = { ...this.config, ...config };
+    }
+  }
+
   /**
    * Validate an atomic citation
    *
@@ -236,14 +328,17 @@ export class TractarianValidator {
     }
 
     // If no persistent identifier (DOI, ISBN), that's a warning
+    // Behavior depends on config.requirePersistentIdentifiers:
+    // - true (strict mode): Mark as requiring uncertainty navigation
+    // - false (standard/lenient): Lowers certainty but stays VALID
     if (!citation.DOI && !citation.ISBN && !citation.url &&
         citation.itemType !== 'manuscript') {
       issues.push({
-        severity: 'warning',
+        severity: this.config.requirePersistentIdentifiers ? 'error' : 'warning',
         field: 'identifiers',
         message: 'No persistent identifier (DOI, ISBN, or URL)',
         suggestion: 'Add DOI or ISBN if available',
-        requiresUncertaintyNavigation: true,  // Low certainty
+        requiresUncertaintyNavigation: this.config.requirePersistentIdentifiers,
       });
     }
 
