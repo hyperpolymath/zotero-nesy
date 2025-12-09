@@ -1,16 +1,15 @@
 ;; STATE.scm - Checkpoint/Restore for AI Conversations
 ;; Project: zotero-nsai (NSAI: Neurosymbolic Research Validator for Zotero)
 ;; "What can be said at all can be said clearly." - Tractatus
-;; Updated: 2025-12-09
 
 ;;; ===================================================================
 ;;; METADATA
 ;;; ===================================================================
 (metadata
   (format-version . "2.0")
-  (schema-version . "2025-12-09")
+  (schema-version . "2025-12-08")
   (created-at . "2025-12-08T20:20:00Z")
-  (last-updated . "2025-12-09T19:28:00Z")
+  (last-updated . "2025-12-08T20:20:00Z")
   (generator . "Claude/STATE-system"))
 
 ;;; ===================================================================
@@ -21,22 +20,20 @@
   (repository . "https://github.com/Hyperpolymath/zotero-nsai")
   (version . "0.1.0-alpha")
   (license . "AGPL-3.0-or-later")
-  (status . "mvp-tests-passing")
+  (status . "mvp-alpha")
   (philosophy . "Tractarian logical atomism")
   (companion-project . "Fogbinder")
-  (branch . "claude/create-state-scm-012At6ReVBvB7N2UJ1RUQbZn")
-  (zotero-target . "7.x only (WebExtension)")
-  (template-recommendation . "https://github.com/hyperpolymath/zoterho-template"))
+  (branch . "claude/create-state-scm-012At6ReVBvB7N2UJ1RUQbZn"))
 
 ;;; ===================================================================
 ;;; CURRENT POSITION
 ;;; ===================================================================
 (current-position
-  (summary . "MVP complete, all 27 tests passing, configurable strictness added")
+  (summary . "MVP implementation complete with minor test failures")
 
   (completed-components
     ("Core Validation Engine" .
-      "TractarianValidator with configurable strictness (strict/standard/lenient)")
+      "TractarianValidator with structural, consistency, referential validation")
     ("Certainty Scoring" .
       "0.0-1.0 scale with structural/consistency/referential factors")
     ("Fogbinder Handoff" .
@@ -46,22 +43,18 @@
     ("UI Foundation" .
       "NCIS-themed popup with accessibility (ARIA, keyboard nav)")
     ("Documentation" .
-      "README, PHILOSOPHY.md, FOGBINDER-HANDOFF.md, CLAUDE.md, STATE.scm")
+      "README, PHILOSOPHY.md, FOGBINDER-HANDOFF.md, CLAUDE.md")
     ("Build System" .
-      "Vite + Vitest configured")
-    ("CI/CD" .
-      "GitHub Actions: test, typecheck, lint, build, security, codeql, rsr-compliance")
-    (".well-known" .
-      "security.txt, ai.txt, humans.txt"))
+      "Vite + Vitest configured"))
 
   (test-status
-    (total-tests . 27)
-    (passing . 27)
-    (failing . 0)
-    (coverage . "core validation and handoff"))
+    (total-tests . 14)
+    (passing . 11)
+    (failing . 3)
+    (syntax-errors . 1))
 
   (key-files
-    ("src/validation/validator.ts" . "Core validation engine with StrictnessLevel config")
+    ("src/validation/validator.ts" . "Core validation engine")
     ("src/fogbinder/handoff.ts" . "Fogbinder integration manager")
     ("src/types/atomic.ts" . "Tractarian data models")
     ("src/types/fogbinder-interface.ts" . "Handoff payload types")
@@ -69,153 +62,199 @@
     ("PHILOSOPHY.md" . "Tractarian philosophical foundation")))
 
 ;;; ===================================================================
-;;; RESOLVED ISSUES (this session)
+;;; ROUTE TO MVP v1
 ;;; ===================================================================
-(resolved-issues
-  (issue-001
-    (summary . "Syntax error: useMystery Clustering")
-    (fix . "Renamed to useMysteryClustering (camelCase)")
-    (files . "handoff.ts, handoff.test.ts, fogbinder-interface.ts, docs"))
-
-  (issue-002
-    (summary . "Test expectation: UNCERTAIN vs VALID")
-    (fix . "Added configurable strictness; standard mode = VALID for missing identifiers")
-    (decision . "User can switch to strict mode if needed"))
-
-  (issue-003
-    (summary . "Certainty threshold test")
-    (fix . "Adjusted test to expect < 0.7 (Fogbinder threshold) not < 0.5")
-    (rationale . "Score of 0.6 for incomplete citations is reasonable"))
-
-  (issue-004
-    (summary . "Batch validation test")
-    (fix . "Tests now pass with standard strictness mode")))
-
-;;; ===================================================================
-;;; ROUTE TO MVP v1.0.0
-;;; ===================================================================
-(route-to-v1
-  (phase-1-web-standards
-    (name . "Web Standards Compliance")
-    (priority . "high")
-    (status . "pending")
+(route-to-mvp-v1
+  (phase-1-immediate
+    (name . "Fix Test Failures")
+    (priority . "critical")
     (tasks
-      ("Dublin Core metadata in HTML" .
-        "Add dc: prefixed meta tags to popup.html")
-      ("VOID dataset description" .
-        "Create void.ttl for linked data description")
-      ("HTTP security headers" .
-        "CSP, X-Frame-Options, X-Content-Type-Options")
-      ("Update security.txt" .
-        "Expires date needs renewal (was 2025-11-22)")
-      (".well-known/host-meta" .
-        "XRD discovery document")
-      ("SRI hashes" .
-        "Subresource Integrity for loaded scripts")))
+      ("Fix syntax error in handoff.test.ts" .
+        "Line 142: 'useMystery Clustering' has space in property name")
+      ("Fix handoff.ts syntax error" .
+        "Same issue: 'useMystery Clustering' property names have spaces")
+      ("Adjust validator test expectations or logic" .
+        "3 tests fail: UNCERTAIN vs VALID state, certainty thresholds")))
 
-  (phase-2-architecture-migration
-    (name . "ReScript + Deno Migration")
+  (phase-2-integration
+    (name . "Zotero API Integration")
     (priority . "high")
-    (status . "planning")
-    (rationale
-      "ReScript provides cleaner JS output, better type safety, smaller bundles"
-      "Deno eliminates npm/node_modules complexity"
-      "WASM for performance-critical validation")
     (tasks
-      ("Create deno.json" .
-        "Deno configuration with TypeScript path aliases")
-      ("Create bsconfig.json" .
-        "ReScript compiler configuration")
-      ("Port validator.ts to Validator.res" .
-        "Core validation logic in ReScript")
-      ("Port handoff.ts to Handoff.res" .
-        "Fogbinder integration in ReScript")
-      ("SCSS setup" .
-        "Replace CSS with SCSS for popup styles")
-      ("WASM module stub" .
-        "Prepare for Lean 4 / Rust WASM integration")))
+      ("Connect to Zotero library API" .
+        "Read citations from actual Zotero library")
+      ("Implement selection handling" .
+        "Get selected items from Zotero UI")
+      ("Wire up validation trigger" .
+        "Right-click context menu or toolbar button")
+      ("Display results in Zotero" .
+        "Show validation popup with results")))
 
-  (phase-3-zotero-integration
-    (name . "Zotero 7 Integration")
-    (priority . "high")
-    (status . "pending")
-    (target . "Zotero 7+ only (deny earlier versions)")
-    (template . "https://github.com/hyperpolymath/zoterho-template")
-    (tasks
-      ("Update manifest.json for Zotero 7" .
-        "WebExtension manifest format")
-      ("Zotero library API connection" .
-        "Read citations from Zotero.Items")
-      ("Selection handling" .
-        "getSelectedItems() integration")
-      ("Context menu" .
-        "Right-click validate action")
-      ("Toolbar button" .
-        "NSAI icon in toolbar")))
-
-  (phase-4-zola-integration
-    (name . "Zola Static Site")
+  (phase-3-polish
+    (name . "Distribution Preparation")
     (priority . "medium")
-    (status . "pending")
     (tasks
-      ("Create config.toml" .
-        "Zola site configuration")
-      ("Documentation site structure" .
-        "docs/, templates/, content/")
-      ("No mixed security" .
-        "All links HTTPS, no mixed content")
-      ("Resource records" .
-        "DNS TXT records for verification")))
+      ("Create NSAI icon/logo" .
+        "Navy/cyan investigative theme")
+      ("Build XPI package" .
+        "Zotero plugin distribution format")
+      ("Settings panel" .
+        "User configuration for thresholds")
+      ("Localization skeleton" .
+        "i18n infrastructure for future translation")))
 
-  (phase-5-release
+  (phase-4-release
     (name . "v1.0.0 Release")
-    (priority . "medium")
-    (status . "pending")
+    (priority . "low")
     (tasks
-      ("Comprehensive test suite" .
-        "100+ tests covering edge cases")
-      ("XPI packaging" .
-        "Zotero plugin distribution")
-      ("zoterho-template integration" .
-        "Recommend as scaffolding")
-      ("Release notes" .
-        "CHANGELOG.md update"))))
+      ("Real-world testing" .
+        "Test with actual research libraries")
+      ("Performance optimization" .
+        "Batch validation for large libraries")
+      ("Documentation update" .
+        "User guide and API docs")
+      ("Release to Zotero plugin repo" .
+        "Make available for installation"))))
 
 ;;; ===================================================================
-;;; ARCHITECTURE DECISIONS
+;;; KNOWN ISSUES
 ;;; ===================================================================
-(decisions
-  (resolved
-    (strictness-configuration
-      (decision . "Offer strict/standard/lenient with advice")
-      (default . "standard")
-      (advice
-        ("strict" . "For systematic reviews, require persistent identifiers")
-        ("standard" . "Balanced validation, suitable for most use cases")
-        ("lenient" . "For grey literature, personal notes")))
+(issues
+  (critical
+    (issue-001
+      (summary . "Syntax error: Property name with space")
+      (location . "src/fogbinder/handoff.ts:176,218")
+      (problem . "'useMystery Clustering' is invalid JavaScript property name")
+      (fix . "Rename to 'useMysteryClustering' (camelCase)")
+      (affects . "handoff.ts and handoff.test.ts")))
 
-    (zotero-version
-      (decision . "Zotero 7+ only")
-      (rationale . "WebExtension API, modern architecture, cleaner code")
-      (support . "Deny Zotero 6.x, recommend upgrade"))
+  (high
+    (issue-002
+      (summary . "Test expectation mismatch: UNCERTAIN vs VALID")
+      (location . "src/validation/validator.test.ts:29")
+      (problem . "Complete citation returns UNCERTAIN, test expects VALID")
+      (analysis . "Citation without DOI/ISBN triggers 'no persistent identifier' warning with requiresUncertaintyNavigation=true, causing UNCERTAIN state")
+      (options .
+        ("Option A: Update test to expect UNCERTAIN for citations without DOI")
+        ("Option B: Add DOI/ISBN to test citation to make it VALID")
+        ("Option C: Adjust logic - don't flag uncertainty for missing identifiers alone")))
 
-    (template
-      (decision . "Recommend zoterho-template")
-      (repository . "https://github.com/hyperpolymath/zoterho-template")
-      (purpose . "Standardized Zotero plugin scaffolding")))
+    (issue-003
+      (summary . "Certainty threshold test failure")
+      (location . "src/validation/validator.test.ts:204")
+      (problem . "Expects score < 0.5 for incomplete citations, gets 0.6")
+      (analysis . "Certainty calculation weights may need adjustment")
+      (fix . "Review certainty formula or adjust test threshold"))
 
-  (pending
-    (rescript-migration
-      (question . "Full ReScript rewrite or incremental?")
+    (issue-004
+      (summary . "Batch validation test failure")
+      (location . "src/validation/validator.test.ts:234")
+      (problem . "Expects all citations VALID, some return UNCERTAIN")
+      (analysis . "Related to issue-002 - missing persistent identifiers")))
+
+  (medium
+    (issue-005
+      (summary . "npm dependencies have deprecation warnings")
+      (details . "inflight, glob, rimraf, humanwhocodes packages deprecated")
+      (fix . "Update eslint to v9+ and related dependencies"))
+
+    (issue-006
+      (summary . "4 moderate security vulnerabilities")
+      (fix . "Run npm audit fix --force (may have breaking changes)"))))
+
+;;; ===================================================================
+;;; QUESTIONS FOR OWNER
+;;; ===================================================================
+(questions
+  (architecture
+    (q1
+      (topic . "Validation strictness")
+      (question . "Should citations without persistent identifiers (DOI/ISBN/URL) be marked UNCERTAIN or just receive a lower certainty score while remaining VALID?")
+      (context . "Current logic flags 'no persistent identifier' as requiring uncertainty navigation, which changes state to UNCERTAIN")
       (options
-        ("Full rewrite" . "Clean slate, better consistency")
-        ("Incremental" . "Less risk, can ship sooner"))
-      (recommendation . "Full rewrite during Phase 2"))
+        ("Strict: Missing identifiers → UNCERTAIN (current behavior)")
+        ("Lenient: Missing identifiers → VALID with lower score")
+        ("Configurable: User chooses strictness level")))
 
-    (robot-repo-cleaner
-      (question . "When to implement hybrid automation?")
-      (context . "Rust-based local+CI repo cleaner")
-      (status . "Deferred to v1.1.0"))))
+    (q2
+      (topic . "Certainty threshold")
+      (question . "What should the certainty score be for citations missing required fields?")
+      (context . "Current: ~0.6 for citations missing date/publisher. Test expects < 0.5")
+      (options
+        ("Adjust formula to be harsher on missing fields")
+        ("Adjust test expectations to match current formula"))))
+
+  (integration
+    (q3
+      (topic . "Zotero version support")
+      (question . "Target Zotero 6.x, 7.x, or both?")
+      (context . "Zotero 7 has different plugin architecture")
+      (options
+        ("Zotero 6 only - Bootstrap extension")
+        ("Zotero 7 only - WebExtension")
+        ("Both - dual-format plugin")))
+
+    (q4
+      (topic . "Fogbinder coordination")
+      (question . "Should NSAI and Fogbinder share a neurosymbolic core?")
+      (context . "PHILOSOPHY.md mentions shared Lean 4 WASM / ONNX")
+      (options
+        ("Separate implementations")
+        ("Shared core library")
+        ("Defer decision until v1.0"))))
+
+  (philosophy
+    (q5
+      (topic . "Tractarian boundary")
+      (question . "Is the current certainty threshold (0.7) correct for the NSAI/Fogbinder boundary?")
+      (context . "Citations >= 0.7 stay in NSAI, < 0.7 flagged for Fogbinder")
+      (options
+        ("0.7 is appropriate")
+        ("Should be higher (0.8) for stricter handoff")
+        ("Should be configurable per-user")))))
+
+;;; ===================================================================
+;;; LONG-TERM ROADMAP
+;;; ===================================================================
+(roadmap
+  (v0-1-0-alpha
+    (status . "current")
+    (features
+      ("Core validation engine" . "complete")
+      ("Certainty scoring" . "complete")
+      ("Fogbinder handoff interface" . "complete")
+      ("NCIS-themed UI" . "complete")
+      ("Accessibility" . "complete"))
+    (remaining
+      ("Fix test failures" . "pending")
+      ("Zotero integration" . "pending")))
+
+  (v0-2-0
+    (status . "planned")
+    (features
+      ("Batch validation optimization" . "planned")
+      ("Custom validation rules" . "planned")
+      ("Export formats: CSV, BibTeX" . "planned")
+      ("Settings panel" . "planned")
+      ("Localization infrastructure" . "planned")))
+
+  (v1-0-0
+    (status . "future")
+    (features
+      ("Lean 4 WASM integration" . "formal verification")
+      ("ONNX Runtime" . "ML-based validation")
+      ("GraphQL API" . "backend communication")
+      ("Fogbinder bidirectional sync" . "two-way handoff")
+      ("Real-time validation" . "as-you-type")
+      ("Optional cloud sync" . "privacy-respecting")))
+
+  (v2-0-0
+    (status . "vision")
+    (features
+      ("Semantic validation" . "content analysis beyond structure")
+      ("Citation recommendation" . "suggest missing sources")
+      ("Research graph visualization" . "citation network")
+      ("Cross-library validation" . "multiple Zotero libraries")
+      ("Plugin ecosystem" . "extensible validation rules"))))
 
 ;;; ===================================================================
 ;;; TECHNOLOGY STACK
@@ -223,62 +262,17 @@
 (stack
   (current
     (language . "TypeScript 5.3")
-    (runtime . "Node.js 18+ / npm")
+    (runtime . "Node.js 18+")
     (build . "Vite 5.0")
     (test . "Vitest 1.0")
     (validation . "Zod 3.22")
-    (lint . "ESLint 8.x")
-    (ci . "GitHub Actions"))
+    (lint . "ESLint 8.x"))
 
-  (target-v1
-    (language . "ReScript 11+")
-    (runtime . "Deno 2.x (no npm)")
-    (styles . "SCSS → CSS")
-    (build . "Deno + ReScript compiler")
-    (test . "Deno test or Vitest")
-    (wasm . "Lean 4 or Rust for performance")
-    (template . "zoterho-template"))
-
-  (future-v2
+  (planned
     (formal-verification . "Lean 4 WASM")
     (ml-inference . "ONNX Runtime Web")
-    (backend . "Elixir + Absinthe GraphQL")
-
-    (noise-analyzer
-      (purpose . "Auto-calibrate thresholds based on user's actual library")
-      (insight . "~80% of real Zotero libraries lack DOI/ISBN fields")
-      (stack
-        ("Julia" . "Statistical noise modeling and field distribution analysis")
-        ("DeepProbLog" . "Probabilistic logic programming for validation rules")
-        ("Qute" . "Quantum-inspired threshold optimization"))
-      (flow
-        ("1. Sample library" . "First 100 citations on install")
-        ("2. Analyze field fill rates" . "DOI, ISBN, date, publisher presence")
-        ("3. Recommend strictness" . "strict/standard/lenient based on corpus")
-        ("4. Custom thresholds" . "Per-field certainty weights")
-        ("5. Noise baseline" . "Expected warning rate for this library type"))
-      (user-value . "Reduces noise fatigue, adaptive validation"))))
-
-;;; ===================================================================
-;;; WEB STANDARDS CHECKLIST
-;;; ===================================================================
-(web-standards
-  (implemented
-    ("security.txt" . "RFC 9116 compliant (needs Expires update)")
-    ("ai.txt" . "AI training policy")
-    ("humans.txt" . "humanstxt.org format")
-    ("SECURITY.md" . "Vulnerability reporting"))
-
-  (needed
-    ("Dublin Core" . "<meta name='dc.title' ...> in HTML")
-    ("VOID" . "void.ttl RDF dataset description")
-    ("host-meta" . ".well-known/host-meta XRD")
-    ("webfinger" . ".well-known/webfinger (optional)")
-    ("CSP header" . "Content-Security-Policy")
-    ("X-Frame-Options" . "DENY or SAMEORIGIN")
-    ("X-Content-Type-Options" . "nosniff")
-    ("SRI" . "integrity= on script/link tags")
-    ("HTTPS only" . "No mixed content")))
+    (type-safety-optional . "ReScript")
+    (backend-optional . "Elixir + Absinthe GraphQL")))
 
 ;;; ===================================================================
 ;;; COMPANION PROJECTS
@@ -289,36 +283,28 @@
     (purpose . "Navigate epistemic ambiguity")
     (philosophy . "Late Wittgenstein - language games, forms of life")
     (theme . "Dark mystery - purple/black")
-    (integration-format . "nsai-to-fogbinder v1.0.0"))
-
-  (zoterho-template
-    (repository . "https://github.com/hyperpolymath/zoterho-template")
-    (purpose . "Zotero plugin scaffolding")
-    (recommendation . "Use for all Hyperpolymath Zotero plugins")))
+    (integration-format . "nsai-to-fogbinder v1.0.0")
+    (features
+      ("Contradiction detection" . "semantic conflicts")
+      ("Mood scoring" . "epistemic stance")
+      ("Mystery clustering" . "uncertainty patterns")
+      ("FogTrail visualization" . "certainty gradient"))))
 
 ;;; ===================================================================
-;;; SESSION LOG (2025-12-09)
+;;; SESSION NOTES
 ;;; ===================================================================
 (session
-  (date . "2025-12-09")
+  (date . "2025-12-08")
   (accomplishments
-    ("Fixed useMystery Clustering syntax error" . "all files updated")
-    ("Added configurable strictness" . "strict/standard/lenient modes")
-    ("All 27 tests passing" . "validator + handoff tests green")
-    ("Updated STATE.scm" . "comprehensive v1.0.0 roadmap")
-    ("Documented decisions" . "Zotero 7, zoterho-template, strictness"))
-
-  (user-decisions
-    ("Strictness: switchable" . "Yes, with advice per level")
-    ("Zotero target" . "7+ only, deny earlier")
-    ("Template" . "zoterho-template recommended")
-    ("Architecture" . "ReScript + SCSS + Deno + WASM"))
+    ("Created STATE.scm" . "Project state documentation")
+    ("Analyzed test failures" . "Identified 3 test issues + 1 syntax error")
+    ("Documented issues" . "Critical, high, medium priority categorization")
+    ("Mapped MVP route" . "4-phase path to v1.0"))
 
   (next-steps
-    ("Dublin Core + VOID metadata" . "web standards")
-    ("Update security.txt expiry" . "immediate")
-    ("Plan ReScript migration" . "Phase 2")
-    ("Zotero 7 manifest update" . "Phase 3")))
+    ("Fix syntax error in handoff.ts/handoff.test.ts" . "immediate")
+    ("Resolve test failures or adjust expectations" . "immediate")
+    ("Begin Zotero API integration" . "next phase")))
 
 ;;; ===================================================================
 ;;; PHILOSOPHICAL CONTEXT
@@ -330,14 +316,20 @@
   (nsai-domain
     (description . "The Sayable - formal validation")
     (approach . "Truth-functional analysis")
-    (configurable-strictness
-      ("strict" . "Maximally certain - require all identifiers")
-      ("standard" . "Balanced certainty - structural completeness")
-      ("lenient" . "Minimal certainty - accept imperfect data")))
+    (examples
+      ("Structural completeness")
+      ("Format consistency")
+      ("Logical coherence")
+      ("Referential integrity")))
 
   (fogbinder-domain
     (description . "The Unsayable - uncertainty exploration")
-    (approach . "Pragmatic investigation"))
+    (approach . "Pragmatic investigation")
+    (examples
+      ("Semantic contradictions")
+      ("Epistemic quality")
+      ("Mood and tone")
+      ("Mystery clustering")))
 
   (handoff-metaphor . "Throwing away the ladder after climbing")
   (tractatus-reference . "6.54"))
