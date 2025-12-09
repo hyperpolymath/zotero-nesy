@@ -1,0 +1,63 @@
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nsai: <https://github.com/Hyperpolymath/zotero-nsai#> .
+
+# NSAI Dataset Description (VOID)
+# Vocabulary of Interlinked Datasets
+# https://www.w3.org/TR/void/
+
+<https://github.com/Hyperpolymath/zotero-nsai>
+    a void:Dataset ;
+    dcterms:title "NSAI - Neurosymbolic Research Validator"@en ;
+    dcterms:description "Validates and prepares research citation data using Tractarian logical analysis. Companion tool to Fogbinder for epistemic exploration."@en ;
+    dcterms:creator <https://github.com/Hyperpolymath> ;
+    dcterms:publisher <https://github.com/Hyperpolymath> ;
+    dcterms:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    dcterms:created "2024-11-22"^^xsd:date ;
+    dcterms:modified "2025-12-09"^^xsd:date ;
+    dcterms:subject "citation validation"@en, "neurosymbolic AI"@en, "Zotero plugin"@en ;
+
+    # Technical details
+    void:feature <http://www.w3.org/ns/formats/JSON-LD> ;
+    void:vocabulary <http://purl.org/dc/terms/> ;
+    void:vocabulary <http://xmlns.com/foaf/0.1/> ;
+
+    # Links to related datasets/projects
+    void:subset <https://github.com/Hyperpolymath/fogbinder> ;
+    rdfs:seeAlso <https://github.com/hyperpolymath/zoterho-template> ;
+
+    # Data statistics (placeholder - update with real values)
+    void:triples "0"^^xsd:integer ;
+    void:entities "0"^^xsd:integer ;
+
+    # Access
+    void:dataDump <https://github.com/Hyperpolymath/zotero-nsai/releases> ;
+    void:sparqlEndpoint "none"^^xsd:string ;
+
+    # Documentation
+    foaf:homepage <https://github.com/Hyperpolymath/zotero-nsai> ;
+    foaf:page <https://github.com/Hyperpolymath/zotero-nsai/blob/main/README.md> .
+
+# Creator/Publisher
+<https://github.com/Hyperpolymath>
+    a foaf:Organization ;
+    foaf:name "Hyperpolymath" ;
+    foaf:homepage <https://github.com/Hyperpolymath> .
+
+# Related: Fogbinder (companion project)
+<https://github.com/Hyperpolymath/fogbinder>
+    a void:Dataset ;
+    dcterms:title "Fogbinder - Epistemic Ambiguity Navigator"@en ;
+    dcterms:description "Navigate epistemic uncertainty in research data. Companion to NSAI."@en ;
+    dcterms:relation <https://github.com/Hyperpolymath/zotero-nsai> .
+
+# Validation Result Linkset (NSAI -> Fogbinder)
+nsai:ValidationResultLinkset
+    a void:Linkset ;
+    void:target <https://github.com/Hyperpolymath/zotero-nsai> ;
+    void:target <https://github.com/Hyperpolymath/fogbinder> ;
+    void:linkPredicate dcterms:relation ;
+    dcterms:description "Links validation results from NSAI to uncertainty regions in Fogbinder"@en .

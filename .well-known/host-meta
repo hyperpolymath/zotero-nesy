@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XRD xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0">
+  <!--
+    Host Metadata for NSAI (Neurosymbolic Research Validator)
+    RFC 6415: Web Host Metadata
+    https://www.rfc-editor.org/rfc/rfc6415
+  -->
+
+  <!-- Subject: The host this metadata describes -->
+  <Subject>https://github.com/Hyperpolymath/zotero-nsai</Subject>
+
+  <!-- Properties -->
+  <Property type="http://purl.org/dc/terms/title">NSAI - Neurosymbolic Research Validator</Property>
+  <Property type="http://purl.org/dc/terms/description">Validates research citations using Tractarian logical analysis</Property>
+  <Property type="http://purl.org/dc/terms/license">AGPL-3.0-or-later</Property>
+
+  <!-- Links to resources -->
+
+  <!-- Security policy -->
+  <Link rel="security"
+        href="https://github.com/Hyperpolymath/zotero-nsai/.well-known/security.txt"
+        type="text/plain"/>
+
+  <!-- AI training policy -->
+  <Link rel="ai-policy"
+        href="https://github.com/Hyperpolymath/zotero-nsai/.well-known/ai.txt"
+        type="text/plain"/>
+
+  <!-- VOID dataset description -->
+  <Link rel="void"
+        href="https://github.com/Hyperpolymath/zotero-nsai/.well-known/void.ttl"
+        type="text/turtle"/>
+
+  <!-- Documentation -->
+  <Link rel="documentation"
+        href="https://github.com/Hyperpolymath/zotero-nsai/blob/main/README.md"
+        type="text/markdown"/>
+
+  <!-- Philosophy -->
+  <Link rel="related"
+        href="https://github.com/Hyperpolymath/zotero-nsai/blob/main/PHILOSOPHY.md"
+        type="text/markdown"
+        title="Tractarian Philosophical Foundation"/>
+
+  <!-- Companion project: Fogbinder -->
+  <Link rel="related"
+        href="https://github.com/Hyperpolymath/fogbinder"
+        title="Fogbinder - Epistemic Ambiguity Navigator"/>
+
+  <!-- Template recommendation -->
+  <Link rel="template"
+        href="https://github.com/hyperpolymath/zoterho-template"
+        title="Recommended Zotero Plugin Template"/>
+
+  <!-- Source code -->
+  <Link rel="source"
+        href="https://github.com/Hyperpolymath/zotero-nsai"
+        type="text/html"/>
+
+  <!-- Issue tracker -->
+  <Link rel="issues"
+        href="https://github.com/Hyperpolymath/zotero-nsai/issues"
+        type="text/html"/>
+
+  <!-- License -->
+  <Link rel="license"
+        href="https://www.gnu.org/licenses/agpl-3.0.html"
+        type="text/html"/>
+
+  <!-- Humans -->
+  <Link rel="author"
+        href="https://github.com/Hyperpolymath/zotero-nsai/.well-known/humans.txt"
+        type="text/plain"/>
+
+</XRD>

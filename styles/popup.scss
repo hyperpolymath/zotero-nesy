@@ -1,0 +1,482 @@
+/**
+ * NSAI Popup Styles
+ * Theme: NCIS Investigation Aesthetic
+ * Colors: Navy blue (#001f3f), Cyan (#00d4ff)
+ * Mood: Professional, analytical, investigative
+ *
+ * "What can be said at all can be said clearly... and stylishly."
+ */
+
+// ============================================================================
+// VARIABLES
+// ============================================================================
+
+// NCIS Color Palette
+$nsai-navy: #001f3f;
+$nsai-navy-light: #003d7a;
+$nsai-navy-dark: #000d1f;
+$nsai-cyan: #00d4ff;
+$nsai-cyan-light: #33ddff;
+$nsai-cyan-dark: #0099cc;
+
+// Semantic Colors
+$color-valid: #00ff88;
+$color-warning: #ffaa00;
+$color-error: #ff3366;
+$color-uncertain: #aa88ff;
+
+// Grays
+$gray-50: #f8f9fa;
+$gray-100: #e9ecef;
+$gray-200: #dee2e6;
+$gray-300: #ced4da;
+$gray-700: #495057;
+$gray-900: #212529;
+
+// Typography
+$font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+$font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+// Spacing
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+
+// Borders
+$border-radius: 6px;
+
+// ============================================================================
+// MIXINS
+// ============================================================================
+
+@mixin glow($color, $intensity: 0.4) {
+  text-shadow: 0 0 8px rgba($color, $intensity);
+}
+
+@mixin box-glow($color, $intensity: 0.3) {
+  box-shadow: 0 2px 8px rgba($color, $intensity);
+}
+
+@mixin card-base {
+  background: $nsai-navy-light;
+  padding: $space-md;
+  border-radius: $border-radius;
+  border: 1px solid $nsai-cyan-dark;
+}
+
+// ============================================================================
+// RESET & BASE
+// ============================================================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $gray-100;
+  background: $nsai-navy-dark;
+  min-width: 400px;
+  max-width: 600px;
+}
+
+// ============================================================================
+// ACCESSIBILITY
+// ============================================================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// ============================================================================
+// LAYOUT
+// ============================================================================
+
+.nsai-container {
+  background: $nsai-navy;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================================================
+// HEADER
+// ============================================================================
+
+.nsai-header {
+  background: linear-gradient(135deg, $nsai-navy-dark, $nsai-navy);
+  padding: $space-lg;
+  border-bottom: 2px solid $nsai-cyan;
+  @include box-glow($nsai-cyan, 0.2);
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: $nsai-cyan;
+    @include glow($nsai-cyan, 0.5);
+    font-family: $font-mono;
+  }
+}
+
+.nsai-logo {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.nsai-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px $nsai-cyan);
+}
+
+.nsai-tagline {
+  margin-top: $space-xs;
+  font-size: 0.875rem;
+  color: $gray-300;
+  font-family: $font-mono;
+  letter-spacing: 0.05em;
+}
+
+// ============================================================================
+// MAIN CONTENT
+// ============================================================================
+
+.nsai-main {
+  flex: 1;
+  padding: $space-lg;
+  overflow-y: auto;
+}
+
+// ============================================================================
+// STATUS CARD
+// ============================================================================
+
+.validation-status {
+  margin-bottom: $space-lg;
+}
+
+.status-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-md;
+  @include card-base;
+  @include box-glow(black, 0.3);
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xs;
+  padding: $space-sm;
+  background: rgba($nsai-cyan, 0.05);
+  border-radius: $border-radius;
+  border: 1px solid rgba($nsai-cyan, 0.2);
+}
+
+.status-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $gray-300;
+  font-family: $font-mono;
+}
+
+.status-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: $nsai-cyan;
+  font-family: $font-mono;
+  @include glow($nsai-cyan);
+
+  &.status-uncertain {
+    color: $color-uncertain;
+    @include glow($color-uncertain);
+  }
+}
+
+// ============================================================================
+// CERTAINTY METER
+// ============================================================================
+
+.certainty-meter {
+  margin-bottom: $space-lg;
+}
+
+.meter-container {
+  @include card-base;
+}
+
+.meter-bar {
+  height: 24px;
+  background: rgba(black, 0.4);
+  border-radius: $border-radius;
+  overflow: hidden;
+  border: 1px solid rgba($nsai-cyan, 0.3);
+  position: relative;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $nsai-cyan-dark, $nsai-cyan);
+  border-radius: $border-radius;
+  transition: width 0.6s ease;
+  width: 0%;
+  box-shadow: 0 0 12px rgba($nsai-cyan, 0.6);
+}
+
+.meter-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $space-xs;
+  font-size: 0.75rem;
+  color: $gray-300;
+  font-family: $font-mono;
+}
+
+// ============================================================================
+// RESULTS SECTION
+// ============================================================================
+
+.results-section {
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $nsai-cyan;
+    margin-bottom: $space-md;
+    font-family: $font-mono;
+  }
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: $space-sm;
+
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $nsai-navy-dark;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $nsai-cyan-dark;
+    border-radius: 4px;
+
+    &:hover {
+      background: $nsai-cyan;
+    }
+  }
+}
+
+.results-empty {
+  text-align: center;
+  color: $gray-300;
+  padding: $space-lg;
+  font-style: italic;
+}
+
+.result-item {
+  background: $nsai-navy-light;
+  padding: $space-md;
+  border-radius: $border-radius;
+  border-left: 4px solid $nsai-cyan;
+  transition: all 0.2s ease;
+
+  &:hover {
+    @include box-glow($nsai-cyan, 0.2);
+  }
+
+  &.valid {
+    border-left-color: $color-valid;
+  }
+
+  &.uncertain {
+    border-left-color: $color-uncertain;
+  }
+
+  &.error {
+    border-left-color: $color-error;
+  }
+}
+
+.result-title {
+  font-weight: 600;
+  color: $gray-100;
+  margin-bottom: $space-xs;
+}
+
+.result-meta {
+  font-size: 0.75rem;
+  color: $gray-300;
+  font-family: $font-mono;
+}
+
+.result-certainty {
+  margin-top: $space-xs;
+  font-size: 0.875rem;
+  color: $nsai-cyan;
+}
+
+// ============================================================================
+// FOGBINDER SECTION
+// ============================================================================
+
+.fogbinder-section {
+  margin-top: $space-lg;
+  padding: $space-md;
+  background: rgba($color-uncertain, 0.1);
+  border: 1px solid $color-uncertain;
+  border-radius: $border-radius;
+
+  h2 {
+    font-size: 1rem;
+    color: $color-uncertain;
+    margin-bottom: $space-md;
+    font-family: $font-mono;
+  }
+}
+
+.fogbinder-message {
+  color: $gray-100;
+  margin-bottom: $space-md;
+
+  strong {
+    color: $color-uncertain;
+    font-family: $font-mono;
+  }
+}
+
+// ============================================================================
+// BUTTONS
+// ============================================================================
+
+.btn {
+  padding: $space-sm $space-md;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: $font-mono;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid $nsai-cyan;
+    outline-offset: 2px;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $nsai-cyan-dark, $nsai-cyan);
+  color: $nsai-navy-dark;
+  @include box-glow($nsai-cyan, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, $nsai-cyan, $nsai-cyan-light);
+    @include box-glow($nsai-cyan, 0.5);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background: $nsai-navy-light;
+  color: $nsai-cyan;
+  border: 1px solid $nsai-cyan-dark;
+
+  &:hover {
+    border-color: $nsai-cyan;
+    @include box-glow($nsai-cyan, 0.2);
+  }
+}
+
+.btn-fogbinder {
+  background: linear-gradient(135deg, #7744cc, $color-uncertain);
+  color: white;
+  width: 100%;
+  @include box-glow($color-uncertain, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #8855dd, #bb99ff);
+    @include box-glow($color-uncertain, 0.5);
+    transform: translateY(-1px);
+  }
+}
+
+// ============================================================================
+// FOOTER
+// ============================================================================
+
+.nsai-footer {
+  display: flex;
+  gap: $space-md;
+  padding: $space-lg;
+  background: $nsai-navy-dark;
+  border-top: 1px solid $nsai-cyan-dark;
+
+  .btn {
+    flex: 1;
+  }
+}
+
+// ============================================================================
+// MEDIA QUERIES
+// ============================================================================
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  $nsai-navy: #000000;
+  $nsai-cyan: #00ffff;
+
+  .status-card,
+  .meter-container,
+  .result-item {
+    border-width: 2px;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .meter-fill,
+  .result-item,
+  .btn {
+    transition: none;
+  }
+}
+
+// Dark Mode (already dark, but ensure consistency)
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+  }
+}

@@ -1,0 +1,150 @@
+# Language Guard - Enforce codebase purity
+# Rejects PRs and commits with forbidden languages
+# "What can be said at all can be said clearly... in ReScript"
+
+name: Language Guard
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  language-guard:
+    name: Enforce Language Policy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for forbidden languages
+        id: forbidden-check
+        run: |
+          echo "🔍 Scanning for forbidden languages..."
+
+          FORBIDDEN_FOUND=0
+          FORBIDDEN_FILES=""
+
+          # TypeScript (the primary evil)
+          TS_FILES=$(find . -type f \( -name "*.ts" -o -name "*.tsx" \) \
+            ! -path "./.git/*" ! -path "./node_modules/*" | head -100)
+          if [ -n "$TS_FILES" ]; then
+            echo "❌ FORBIDDEN: TypeScript files detected!"
+            echo "$TS_FILES"
+            FORBIDDEN_FOUND=1
+            FORBIDDEN_FILES="$FORBIDDEN_FILES$TS_FILES\n"
+          fi
+
+          # CoffeeScript
+          COFFEE_FILES=$(find . -type f -name "*.coffee" \
+            ! -path "./.git/*" | head -100)
+          if [ -n "$COFFEE_FILES" ]; then
+            echo "❌ FORBIDDEN: CoffeeScript files detected!"
+            echo "$COFFEE_FILES"
+            FORBIDDEN_FOUND=1
+            FORBIDDEN_FILES="$FORBIDDEN_FILES$COFFEE_FILES\n"
+          fi
+
+          # Go
+          GO_FILES=$(find . -type f -name "*.go" \
+            ! -path "./.git/*" | head -100)
+          if [ -n "$GO_FILES" ]; then
+            echo "❌ FORBIDDEN: Go files detected!"
+            echo "$GO_FILES"
+            FORBIDDEN_FOUND=1
+            FORBIDDEN_FILES="$FORBIDDEN_FILES$GO_FILES\n"
+          fi
+
+          # Python (unless Salt)
+          PY_FILES=$(find . -type f -name "*.py" \
+            ! -path "./.git/*" ! -path "*salt*" ! -path "*Salt*" | head -100)
+          if [ -n "$PY_FILES" ]; then
+            echo "❌ FORBIDDEN: Python files detected (non-Salt)!"
+            echo "$PY_FILES"
+            FORBIDDEN_FOUND=1
+            FORBIDDEN_FILES="$FORBIDDEN_FILES$PY_FILES\n"
+          fi
+
+          # npm artifacts (node_modules should never be committed)
+          if [ -d "node_modules" ]; then
+            echo "❌ FORBIDDEN: node_modules directory detected!"
+            FORBIDDEN_FOUND=1
+          fi
+
+          # package.json (npm dependency)
+          if [ -f "package.json" ]; then
+            echo "❌ FORBIDDEN: package.json detected! Use deno.json instead."
+            FORBIDDEN_FOUND=1
+          fi
+
+          # package-lock.json
+          if [ -f "package-lock.json" ]; then
+            echo "❌ FORBIDDEN: package-lock.json detected!"
+            FORBIDDEN_FOUND=1
+          fi
+
+          # tsconfig.json
+          if [ -f "tsconfig.json" ]; then
+            echo "❌ FORBIDDEN: tsconfig.json detected!"
+            FORBIDDEN_FOUND=1
+          fi
+
+          if [ $FORBIDDEN_FOUND -eq 1 ]; then
+            echo ""
+            echo "═══════════════════════════════════════════════════════════"
+            echo "  🚫 FORBIDDEN LANGUAGES DETECTED - BUILD WILL FAIL"
+            echo "═══════════════════════════════════════════════════════════"
+            echo ""
+            echo "This project ONLY accepts:"
+            echo "  ✅ ReScript (.res, .resi)"
+            echo "  ✅ SCSS (.scss)"
+            echo "  ✅ Shell scripts (.sh)"
+            echo "  ✅ Scheme/Lisp (.scm)"
+            echo "  ✅ Deno configuration (deno.json)"
+            echo "  ✅ Rust (.rs) - for WASM modules"
+            echo "  ✅ Lean 4 (.lean) - for formal verification"
+            echo "  ✅ Julia (.jl) - for noise analysis (v2.0)"
+            echo "  ✅ Python (.py) - ONLY if Salt-related"
+            echo ""
+            echo "BANNED:"
+            echo "  ❌ TypeScript (.ts, .tsx)"
+            echo "  ❌ CoffeeScript (.coffee)"
+            echo "  ❌ Go (.go)"
+            echo "  ❌ npm (package.json, node_modules)"
+            echo "  ❌ Any other 'evilscripts'"
+            echo ""
+            exit 1
+          fi
+
+          echo "✅ Language policy check passed!"
+
+      - name: Verify ReScript files exist
+        run: |
+          echo "🔍 Checking for ReScript source files..."
+
+          RES_COUNT=$(find . -type f -name "*.res" ! -path "./.git/*" | wc -l)
+
+          if [ "$RES_COUNT" -eq 0 ]; then
+            echo "⚠️ Warning: No ReScript files found. Is this a new project?"
+          else
+            echo "✅ Found $RES_COUNT ReScript file(s)"
+            find . -type f -name "*.res" ! -path "./.git/*"
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          echo ""
+          echo "═══════════════════════════════════════════════════════════"
+          echo "  📋 LANGUAGE GUARD SUMMARY"
+          echo "═══════════════════════════════════════════════════════════"
+          echo ""
+          echo "Accepted languages: ReScript, SCSS, Shell, Scheme, Rust, Lean, Julia"
+          echo "Banned languages: TypeScript, CoffeeScript, Go, Python (non-Salt), npm"
+          echo ""
+          echo "\"What can be said at all can be said clearly... in ReScript\""
+          echo ""

@@ -1,0 +1,32 @@
+{
+  "name": "@hyperpolymath/zotero-nsai",
+  "version": "0.1.0-alpha",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".res.js",
+  "bs-dependencies": [],
+  "warnings": {
+    "number": "+A-48-42"
+  },
+  "reason": {
+    "react-jsx": 3
+  },
+  "gentypeconfig": {
+    "language": "untyped",
+    "shims": {},
+    "module": "es6",
+    "debug": {
+      "all": false
+    }
+  }
+}

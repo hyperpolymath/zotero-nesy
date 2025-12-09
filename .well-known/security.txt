@@ -31,4 +31,4 @@ Policy: https://github.com/Hyperpolymath/zotero-nsai/blob/main/SECURITY.md
 
 Acknowledgments: https://github.com/Hyperpolymath/zotero-nsai/blob/main/SECURITY.md#security-audit-history
 
-Expires: 2025-11-22T00:00:00.000Z
+Expires: 2026-12-09T00:00:00.000Z

@@ -1,0 +1,52 @@
+#!/bin/sh
+# Pre-commit hook for NSAI
+# Auto-updates STATE.scm before each commit
+#
+# Install: git config core.hooksPath .githooks
+
+# Update STATE.scm
+if [ -x "scripts/update-state.sh" ]; then
+  ./scripts/update-state.sh --no-test
+
+  # Stage the updated STATE.scm
+  git add STATE.scm
+fi
+
+# Check for forbidden languages
+FORBIDDEN=""
+
+# TypeScript
+TS_FILES=$(git diff --cached --name-only | grep -E '\.(ts|tsx)$' | head -5)
+if [ -n "$TS_FILES" ]; then
+  FORBIDDEN="$FORBIDDEN\n TypeScript: $TS_FILES"
+fi
+
+# CoffeeScript
+COFFEE_FILES=$(git diff --cached --name-only | grep -E '\.coffee$' | head -5)
+if [ -n "$COFFEE_FILES" ]; then
+  FORBIDDEN="$FORBIDDEN\n CoffeeScript: $COFFEE_FILES"
+fi
+
+# Go
+GO_FILES=$(git diff --cached --name-only | grep -E '\.go$' | head -5)
+if [ -n "$GO_FILES" ]; then
+  FORBIDDEN="$FORBIDDEN\n Go: $GO_FILES"
+fi
+
+# package.json
+PKG_FILES=$(git diff --cached --name-only | grep -E '^package\.json$|^package-lock\.json$' | head -5)
+if [ -n "$PKG_FILES" ]; then
+  FORBIDDEN="$FORBIDDEN\n npm: $PKG_FILES"
+fi
+
+if [ -n "$FORBIDDEN" ]; then
+  echo ""
+  echo "COMMIT BLOCKED: Forbidden languages detected!"
+  echo "$FORBIDDEN"
+  echo ""
+  echo "This project only accepts: ReScript, SCSS, Shell, Scheme"
+  echo ""
+  exit 1
+fi
+
+exit 0

@@ -1,0 +1,82 @@
+{
+  "name": "@hyperpolymath/zotero-nsai",
+  "version": "0.1.0-alpha",
+  "description": "NSAI: Neurosymbolic validation and preparation for Zotero research data",
+  "license": "AGPL-3.0-or-later",
+
+  "tasks": {
+    "dev": "deno run --watch src/index.ts",
+    "build": "deno run -A scripts/build.ts",
+    "test": "deno test --allow-read src/",
+    "test:watch": "deno test --watch --allow-read src/",
+    "test:coverage": "deno test --coverage=coverage/ --allow-read src/",
+    "lint": "deno lint src/",
+    "fmt": "deno fmt src/",
+    "check": "deno check src/**/*.ts",
+    "typecheck": "deno check src/**/*.ts"
+  },
+
+  "imports": {
+    "zod": "npm:zod@^3.22.4",
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "@std/testing": "jsr:@std/testing@^1.0.0"
+  },
+
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "lib": ["deno.window", "dom", "dom.iterable", "esnext"]
+  },
+
+  "lint": {
+    "include": ["src/"],
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo", "no-unused-vars"],
+      "exclude": ["no-explicit-any"]
+    }
+  },
+
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": ["src/"]
+  },
+
+  "test": {
+    "include": ["src/**/*.test.ts"]
+  },
+
+  "exclude": [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "coverage/"
+  ],
+
+  "nodeModulesDir": false,
+
+  "metadata": {
+    "rsr": {
+      "compliance": "silver",
+      "version": "1.0.0",
+      "verified": "2024-11-22"
+    },
+    "security": {
+      "policy": "https://github.com/Hyperpolymath/zotero-nsai/blob/main/SECURITY.md",
+      "contact": "https://github.com/Hyperpolymath/zotero-nsai/security/advisories/new"
+    },
+    "tpcf": {
+      "perimeter": 3,
+      "description": "Community Sandbox - Open Contribution"
+    }
+  }
+}
