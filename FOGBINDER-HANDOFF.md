@@ -129,7 +129,7 @@ A cluster of citations requiring Fogbinder exploration:
   suggestedExploration: {
     useContradictionDetection?: boolean,
     useMoodScoring?: boolean,
-    useMystery Clustering?: boolean,
+    useMysteryClustering?: boolean,
     useFogTrailVisualization?: boolean
   },
 

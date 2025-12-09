@@ -83,7 +83,7 @@ export interface UncertaintyRegion {
   suggestedExploration: {
     useContradictionDetection?: boolean;
     useMoodScoring?: boolean;
-    useMystery Clustering?: boolean;
+    useMysteryClustering?: boolean;
     useFogTrailVisualization?: boolean;
   };
 
