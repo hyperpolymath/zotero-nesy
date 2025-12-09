@@ -10,7 +10,7 @@
   (format-version . "2.0")
   (schema-version . "2025-12-09")
   (created-at . "2025-12-08T20:20:00Z")
-  (last-updated . "2025-12-09T20:15:00Z")
+  (last-updated . "2025-12-09T21:00:00Z")
   (generator . "Claude/STATE-system"))
 
 ;;; ===================================================================
@@ -52,22 +52,26 @@
     ("CI/CD" .
       "GitHub Actions with LANGUAGE GUARD (blocks TypeScript, npm, Go, Python)")
     (".well-known" .
-      "security.txt, ai.txt, humans.txt, void.ttl, host-meta.json")
+      "security.txt, ai.txt, humans.txt, void.ttl, host-meta.json, aibdp.json")
     ("Auto-update" .
-      "Shell script + git hook for STATE.scm updates"))
+      "Shell script + git hook for STATE.scm updates")
+    ("RSR Compliance" .
+      "Full RSR Standard Form v1.0 - Rhodium tier")
+    ("Coordination" .
+      "elegant-STATE integration + rhodibot Category 12"))
 
   (key-files
     ("src/Validation/Validator.res" . "Core validation engine")
     ("src/Fogbinder/Handoff.res" . "Fogbinder integration manager")
     ("src/Types/Atomic.res" . "Tractarian data models")
     ("src/Types/FogbinderInterface.res" . "Handoff payload types")
+    ("src/Formats/CitationFormats.res" . "Harvard, OSCOLA, MLA, Dublin Core")
     ("styles/popup.scss" . "NCIS-themed styles")
     ("rescript.json" . "ReScript compiler config")
     ("deno.json" . "Deno runtime config")
-    (".github/workflows/language-guard.yml" . "Forbidden language enforcement")
-    ("scripts/update-state.sh" . "STATE.scm auto-updater")
-    (".githooks/pre-commit" . "Pre-commit language check")
-    ("PHILOSOPHY.md" . "Tractarian philosophical foundation")))
+    (".rhodibot.ncl" . "Rhodibot compliance config")
+    ("config/elegant-state.ncl" . "elegant-STATE coordination")
+    ("ECOSYSTEM.scm" . "Meta-project coordination")))
 
 ;;; ===================================================================
 ;;; LANGUAGE POLICY
@@ -75,9 +79,11 @@
 (language-policy
   (accepted
     ("ReScript" . ".res, .resi - Primary language")
+    ("Guile/Scheme" . ".scm - Tooling, STATE files")
     ("SCSS" . ".scss - Styles")
     ("Shell" . ".sh - Scripts")
-    ("Scheme" . ".scm - Documentation")
+    ("Nickel" . ".ncl - Type-safe config")
+    ("CUE" . ".cue - Config generation")
     ("Rust" . ".rs - WASM modules (future)")
     ("Lean 4" . ".lean - Formal verification (future)")
     ("Julia" . ".jl - Noise analysis (v2.0)")
@@ -90,9 +96,10 @@
     ("npm" . "package.json, node_modules - DELETED AND BLOCKED"))
 
   (enforcement
+    ("Rhodibot" . "Category 12 language policy enforcement")
     ("CI/CD" . "language-guard.yml fails build on forbidden files")
     ("Pre-commit" . ".githooks/pre-commit blocks commits")
-    ("Documentation" . "STATE.scm records policy")))
+    ("Documentation" . "STATE.scm + .rhodibot.ncl record policy")))
 
 ;;; ===================================================================
 ;;; ROUTE TO MVP v1.0.0
@@ -100,17 +107,16 @@
 (route-to-v1
   (phase-1-web-standards
     (name . "Web Standards Compliance")
-    (priority . "high")
     (status . "COMPLETE")
     (completed
       ("Dublin Core metadata" . "popup.html has dc: prefixed meta tags")
       ("VOID dataset description" . "void.ttl created")
       ("security.txt" . "Expires updated to 2026-12-09")
-      (".well-known/host-meta" . "XRD and JSON versions created")))
+      (".well-known/host-meta" . "XRD and JSON versions created")
+      (".well-known/aibdp.json" . "AI Boundary Declaration Protocol")))
 
   (phase-2-architecture-migration
     (name . "ReScript + Deno Migration")
-    (priority . "high")
     (status . "COMPLETE")
     (completed
       ("deno.json" . "Deno configuration created")
@@ -119,40 +125,41 @@
       ("Handoff.res" . "Fogbinder integration ported")
       ("Atomic.res" . "Type definitions ported")
       ("FogbinderInterface.res" . "Handoff types ported")
+      ("CitationFormats.res" . "Harvard, OSCOLA, MLA, Dublin Core")
       ("SCSS" . "popup.scss with mixins and variables")
       ("TypeScript purged" . "All .ts files deleted")
       ("npm purged" . "package.json, node_modules deleted")))
 
-  (phase-3-zotero-integration
+  (phase-3-rsr-compliance
+    (name . "RSR Standard Form")
+    (status . "COMPLETE")
+    (completed
+      ("RSR-STANDARD-FORM.adoc" . "Canonical specification")
+      (".rhodibot.ncl" . "Rhodibot compliance config")
+      ("config/elegant-state.ncl" . "Coordination integration")
+      ("ECOSYSTEM.scm" . "Meta-project coordination")
+      ("guix/channels.scm" . "Guix package definition")
+      ("nix/flake.nix" . "Nix flake with dev shell")
+      ("zola/config.toml" . "Static site configuration")
+      ("formal-verification/" . "Verification roadmap")))
+
+  (phase-4-zotero-integration
     (name . "Zotero 7 Integration")
-    (priority . "high")
     (status . "IN PROGRESS")
     (target . "Zotero 7+ only (deny earlier versions)")
-    (template . "https://github.com/hyperpolymath/zoterho-template")
     (remaining
-      ("Update manifest.json for Zotero 7" . "WebExtension manifest format")
-      ("Zotero library API connection" . "Read citations from Zotero.Items")
-      ("UI popup implementation" . "Popup.res controller")
-      ("Context menu" . "Right-click validate action")
-      ("Toolbar button" . "NSAI icon in toolbar")))
-
-  (phase-4-zola-integration
-    (name . "Zola Static Site")
-    (priority . "medium")
-    (status . "pending")
-    (tasks
-      ("Create config.toml" . "Zola site configuration")
-      ("Documentation site structure" . "docs/, templates/, content/")
-      ("Wiki integration" . "Link to GitHub wiki")))
+      ("ReScript compilation test" . "Build .res → .res.js")
+      ("SCSS compilation" . "Build .scss → .css")
+      ("XPI packaging" . "Distributable plugin")
+      ("Zotero library API connection" . "Read citations")
+      ("Integration test" . "End-to-end validation")))
 
   (phase-5-release
     (name . "v1.0.0 Release")
-    (priority . "medium")
     (status . "pending")
     (tasks
-      ("ReScript compilation" . "Build pipeline for .res → .js")
       ("Test suite" . "ReScript tests with assertions")
-      ("XPI packaging" . "Zotero plugin distribution")
+      ("Documentation" . "User guide")
       ("Release notes" . "CHANGELOG.md update"))))
 
 ;;; ===================================================================
@@ -163,8 +170,10 @@
     (language . "ReScript 11+")
     (runtime . "Deno 2.x")
     (styles . "SCSS")
+    (config . "Nickel + CUE")
     (build . "ReScript compiler + Deno")
-    (ci . "GitHub Actions + Language Guard"))
+    (ci . "GitHub Actions + Rhodibot")
+    (coordination . "elegant-STATE + ECOSYSTEM.scm"))
 
   (future-v2
     (formal-verification . "Lean 4 WASM")
@@ -191,27 +200,44 @@
 
   (zoterho-template
     (repository . "https://github.com/hyperpolymath/zoterho-template")
-    (purpose . "Zotero plugin scaffolding")))
+    (purpose . "Zotero plugin scaffolding"))
+
+  (zotero-rescript-templater
+    (repository . "https://github.com/hyperpolymath/zotero-rescript-templater")
+    (purpose . "RSR-compliant plugin generator")
+    (status . "needs-fix"))
+
+  (rhodibot
+    (repository . "https://github.com/hyperpolymath/gitvisor/satellite-repos/rhodibot")
+    (purpose . "RSR enforcement bot")
+    (integration . "Category 12 language policy"))
+
+  (elegant-STATE
+    (repository . "https://github.com/hyperpolymath/elegant-STATE")
+    (purpose . "Multi-agent coordination")
+    (integration . "GraphQL sync")))
 
 ;;; ===================================================================
-;;; SESSION LOG (2025-12-09 - Current)
+;;; SESSION LOG (2025-12-09)
 ;;; ===================================================================
 (session
   (date . "2025-12-09")
   (accomplishments
     ("ReScript migration" . "Full rewrite from TypeScript")
     ("Language guard" . "CI/CD blocks forbidden languages")
-    ("Pre-commit hook" . "Blocks commits with TypeScript/npm")
-    ("SCSS styles" . "Replaced CSS with SCSS")
-    ("STATE.scm auto-update" . "Shell script + git hook")
+    ("RSR Standard Form" . "Full Rhodium tier compliance")
+    ("Rhodibot Category 12" . "Language policy enforcement spec")
+    ("elegant-STATE integration" . "Nickel config for coordination")
+    ("Citation formats" . "Harvard, OSCOLA, MLA, Dublin Core, BibTeX, RIS")
+    ("ECOSYSTEM.scm" . "Meta-project coordination")
     ("TypeScript purged" . "All .ts files removed")
     ("npm purged" . "package.json, node_modules removed"))
 
   (remaining-for-launch
-    ("Zotero manifest" . "Update for Zotero 7")
-    ("UI implementation" . "Popup.res")
-    ("Build pipeline" . "ReScript → JS compilation")
-    ("XPI packaging" . "Distributable plugin")))
+    ("ReScript compilation" . "Build .res → .res.js")
+    ("SCSS compilation" . "Build .scss → .css")
+    ("XPI packaging" . "Distributable plugin")
+    ("Integration test" . "End-to-end with Zotero 7")))
 
 ;;; ===================================================================
 ;;; PHILOSOPHICAL CONTEXT
