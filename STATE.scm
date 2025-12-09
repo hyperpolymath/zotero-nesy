@@ -242,7 +242,22 @@
   (future-v2
     (formal-verification . "Lean 4 WASM")
     (ml-inference . "ONNX Runtime Web")
-    (backend . "Elixir + Absinthe GraphQL")))
+    (backend . "Elixir + Absinthe GraphQL")
+
+    (noise-analyzer
+      (purpose . "Auto-calibrate thresholds based on user's actual library")
+      (insight . "~80% of real Zotero libraries lack DOI/ISBN fields")
+      (stack
+        ("Julia" . "Statistical noise modeling and field distribution analysis")
+        ("DeepProbLog" . "Probabilistic logic programming for validation rules")
+        ("Qute" . "Quantum-inspired threshold optimization"))
+      (flow
+        ("1. Sample library" . "First 100 citations on install")
+        ("2. Analyze field fill rates" . "DOI, ISBN, date, publisher presence")
+        ("3. Recommend strictness" . "strict/standard/lenient based on corpus")
+        ("4. Custom thresholds" . "Per-field certainty weights")
+        ("5. Noise baseline" . "Expected warning rate for this library type"))
+      (user-value . "Reduces noise fatigue, adaptive validation"))))
 
 ;;; ===================================================================
 ;;; WEB STANDARDS CHECKLIST
