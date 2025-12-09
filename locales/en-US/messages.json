@@ -1,0 +1,68 @@
+{
+  "extensionName": {
+    "message": "NSAI - Neurosymbolic Research Validator",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Validates and prepares research data using Tractarian logical analysis",
+    "description": "Description of the extension"
+  },
+  "validateButton": {
+    "message": "Validate Citations",
+    "description": "Button to trigger validation"
+  },
+  "exportButton": {
+    "message": "Export to Fogbinder",
+    "description": "Button to export uncertain citations to Fogbinder"
+  },
+  "statusValidated": {
+    "message": "Validated",
+    "description": "Label for validated count"
+  },
+  "statusUncertain": {
+    "message": "Uncertain",
+    "description": "Label for uncertain count"
+  },
+  "statusCertainty": {
+    "message": "Certainty",
+    "description": "Label for certainty score"
+  },
+  "resultsHeading": {
+    "message": "Validation Results",
+    "description": "Heading for results section"
+  },
+  "noResults": {
+    "message": "No validation data available.",
+    "description": "Message when no results"
+  },
+  "fogbinderHeading": {
+    "message": "Uncertainty Detected",
+    "description": "Heading for Fogbinder section"
+  },
+  "fogbinderMessage": {
+    "message": "$COUNT$ uncertainty regions detected. Consider exploring in Fogbinder.",
+    "description": "Message about uncertainty regions",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "stateValid": {
+    "message": "Valid",
+    "description": "Citation state: valid"
+  },
+  "stateIncomplete": {
+    "message": "Incomplete",
+    "description": "Citation state: incomplete"
+  },
+  "stateInvalid": {
+    "message": "Invalid",
+    "description": "Citation state: invalid"
+  },
+  "stateUncertain": {
+    "message": "Uncertain",
+    "description": "Citation state: uncertain"
+  }
+}

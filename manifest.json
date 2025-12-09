@@ -16,8 +16,8 @@
   },
 
   "icons": {
-    "48": "icons/nsai-48.png",
-    "96": "icons/nsai-96.png"
+    "48": "icons/nsai-48.svg",
+    "96": "icons/nsai-96.svg"
   },
 
   "background": {
@@ -30,7 +30,7 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/nsai-48.png",
+    "default_icon": "icons/nsai-48.svg",
     "default_title": "NSAI Validator",
     "default_popup": "popup.html"
   },

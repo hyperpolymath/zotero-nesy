@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- NSAI Logo: Tractarian certainty symbol -->
+  <!-- Navy background with cyan accents -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001f3f"/>
+      <stop offset="100%" style="stop-color:#003d7a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0099cc"/>
+      <stop offset="100%" style="stop-color:#00d4ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="url(#bg)" stroke="url(#accent)" stroke-width="2"/>
+
+  <!-- Certainty meter arc -->
+  <path d="M 12 32 A 14 14 0 0 1 36 32"
+        fill="none" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Validation checkmark -->
+  <path d="M 16 24 L 22 30 L 34 16"
+        fill="none" stroke="#00ff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- N letter hint -->
+  <text x="24" y="42" font-family="monospace" font-size="8" fill="#00d4ff" text-anchor="middle">N</text>
+</svg>
