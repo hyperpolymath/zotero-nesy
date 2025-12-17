@@ -2,18 +2,18 @@
 
 import * as Validator from "./validation/Validator.res.mjs";
 
-let Atomic;
+var Atomic;
 
-let Validator$1;
+var Validator$1;
 
-let validate = Validator.validate;
+var validate = Validator.validate;
 
-let validateBatch = Validator.validateBatch;
+var validateBatch = Validator.validateBatch;
 
 export {
-  Atomic,
+  Atomic ,
   Validator$1 as Validator,
-  validate,
-  validateBatch,
+  validate ,
+  validateBatch ,
 }
 /* No side effect */

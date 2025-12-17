@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'src/Index.res.mjs'),
       name: 'ZoteroNSAI',
       fileName: 'index',
       formats: ['es']

@@ -8,12 +8,13 @@
   ],
   "package-specs": [
     {
-      "module": "es6",
+      "module": "esmodule",
       "in-source": true
     }
   ],
   "suffix": ".res.mjs",
-  "dependencies": [],
+  "bs-dependencies": ["@rescript/core"],
+  "bsc-flags": ["-open RescriptCore"],
   "warnings": {
     "error": "+101"
   }

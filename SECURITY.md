@@ -12,7 +12,7 @@
 
 ### Preferred Contact Method
 
-Report security vulnerabilities to: **security@[REPOSITORY-OWNER-EMAIL]**
+Report security vulnerabilities via [GitHub Security Advisories](https://github.com/Hyperpolymath/zotero-nsai/security/advisories/new)
 
 ### What to Include
 
