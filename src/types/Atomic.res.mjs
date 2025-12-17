@@ -4,67 +4,69 @@
 function itemTypeToString(itemType) {
   switch (itemType) {
     case "Book" :
-      return "book";
+        return "book";
     case "BookSection" :
-      return "bookSection";
+        return "bookSection";
     case "JournalArticle" :
-      return "journalArticle";
+        return "journalArticle";
     case "ConferencePaper" :
-      return "conferencePaper";
+        return "conferencePaper";
     case "Thesis" :
-      return "thesis";
+        return "thesis";
     case "Webpage" :
-      return "webpage";
+        return "webpage";
     case "Manuscript" :
-      return "manuscript";
+        return "manuscript";
     case "Report" :
-      return "report";
+        return "report";
     case "Patent" :
-      return "patent";
+        return "patent";
+    
   }
 }
 
 function stringToItemType(str) {
   switch (str) {
     case "book" :
-      return "Book";
+        return "Book";
     case "bookSection" :
-      return "BookSection";
+        return "BookSection";
     case "conferencePaper" :
-      return "ConferencePaper";
+        return "ConferencePaper";
     case "journalArticle" :
-      return "JournalArticle";
+        return "JournalArticle";
     case "manuscript" :
-      return "Manuscript";
+        return "Manuscript";
     case "patent" :
-      return "Patent";
+        return "Patent";
     case "report" :
-      return "Report";
+        return "Report";
     case "thesis" :
-      return "Thesis";
+        return "Thesis";
     case "webpage" :
-      return "Webpage";
+        return "Webpage";
     default:
-      return;
+      return ;
   }
 }
 
 function validationStateToString(state) {
   switch (state) {
     case "Valid" :
-      return "VALID";
+        return "VALID";
     case "Incomplete" :
-      return "INCOMPLETE";
+        return "INCOMPLETE";
     case "Inconsistent" :
-      return "INCONSISTENT";
+        return "INCONSISTENT";
     case "Uncertain" :
-      return "UNCERTAIN";
+        return "UNCERTAIN";
+    
   }
 }
 
 export {
-  itemTypeToString,
-  stringToItemType,
-  validationStateToString,
+  itemTypeToString ,
+  stringToItemType ,
+  validationStateToString ,
 }
 /* No side effect */

@@ -2,17 +2,19 @@
   "name": "zotero-nsai",
   "version": "0.1.0-alpha",
   "description": "NSAI: Neurosymbolic validation and preparation for Zotero research data",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "type": "module",
   "scripts": {
     "dev": "vite build --watch",
-    "build": "tsc && vite build",
+    "build": "vite build",
+    "build:res": "rescript build",
+    "clean:res": "rescript clean",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit"
+    "lint": "rescript build",
+    "typecheck": "echo 'ReScript provides type checking - run npm run build:res'"
   },
   "keywords": [
     "zotero",
@@ -49,16 +51,17 @@
     "npm": ">=9.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@types/node": "^25.0.2",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "@typescript-eslint/parser": "^8.50.0",
-    "eslint": "^8.55.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.7",
-    "vitest": "^4.0.15"
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "rescript": "^11.1.4",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.3"
   },
   "dependencies": {
-    "zod": "^3.22.4"
+    "@rescript/core": "^1.6.1",
+    "zod": "^3.24.2"
   },
   "rsr": {
     "compliance": "silver",

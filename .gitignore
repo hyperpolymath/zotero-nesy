@@ -9,6 +9,11 @@ dist/
 build/
 *.xpi
 
+# ReScript build artifacts
+lib/bs/
+lib/ocaml/
+.bsb.lock
+
 # TypeScript
 *.tsbuildinfo
 
