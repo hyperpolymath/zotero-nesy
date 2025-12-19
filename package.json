@@ -56,7 +56,7 @@
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
     "rescript": "^11.1.4",
-    "vite": "^6.3.5",
+    "vite": "^7.3.0",
     "vitest": "^3.2.3"
   },
   "dependencies": {
