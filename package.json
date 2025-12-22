@@ -55,9 +55,9 @@
     "@types/node": "^25.0.2",
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
-    "rescript": "^11.1.4",
+    "rescript": "^12.0.1",
     "vite": "^6.3.5",
-    "vitest": "^3.2.3"
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "@rescript/core": "^1.6.1",
