@@ -57,7 +57,7 @@ See [FOGBINDER-HANDOFF.md](./FOGBINDER-HANDOFF.md) for complete integration deta
 - *Local-first processing*
 - *No API key storage*
 - *Input sanitization*
-- *GNU AGPLv3 license*
+- *PMPLv3 license*
 
 == Installation
 
@@ -284,7 +284,7 @@ Contributions welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) (coming s
 
 == License
 
-*GNU Affero General Public License v3.0 (AGPL-3.0)*
+*Palimpsest-MPL License v3.0 (PMPL-1.0)*
 
 This ensures:
 - ✅ Free software (freedom to use, study, modify, distribute)
